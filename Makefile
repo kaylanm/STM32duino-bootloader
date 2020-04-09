@@ -113,6 +113,7 @@ ELFSIZE = $(SIZE) -A $(TARGET).elf
 # go!
 all: begin gccversion build sizeafter finished end
 
+m12og: begin clean gccversion build_m12og sizeafter finished  copy_m12og end
 maple-mini: begin clean gccversion build_maple-mini sizeafter finished  copy_maple_mini end
 maple-rev3: begin clean gccversion build_maple-rev3 sizeafter finished  copy_maple-rev3 end
 maple-rev5: begin clean gccversion build_maple-rev5 sizeafter finished  copy_maple-rev5 end
@@ -142,6 +143,18 @@ generic-pc13-fastboot: begin clean gccversion build_generic-pc13-fastboot sizeaf
 smart-v2: begin clean gccversion build_smart-v2 sizeafter finished  copy_smart-v2 end
 
 build: elf bin lss sym
+
+build_m12og: TARGETFLAGS= -DTARGET_M12OG $(DEFINES)
+# Set the linker script
+build_m12og: LDFLAGS +=-T$(ST_LIB)/c_only_md_high_density.ld
+
+build_m12og: elf bin lss sym
+copy_m12og:
+	@echo
+	@echo "Copying to binaries folder"
+	@echo
+	cp $(TARGET).bin bootloader_only_binaries/m12og.bin
+	@echo
 
 build_maple-mini: TARGETFLAGS= -DTARGET_MAPLE_MINI $(DEFINES)
 # Set the linker script

@@ -92,7 +92,23 @@
     #define BUTTON_PRESSED_STATE 1
 */
 
-#if defined TARGET_MAPLE_MINI
+#if defined TARGET_M12OG
+    #define HAS_MAPLE_HARDWARE 1
+
+    #define LED_BANK             GPIOB
+    #define LED_PIN              5
+    #define LED_ON_STATE         1
+
+    #define BUTTON_BANK          GPIOB
+    #define BUTTON_PIN           2
+    #define BUTTON_PRESSED_STATE 1
+
+    #define USB_DISC_BANK        GPIOA
+    #define USB_DISC_PIN         8
+
+    #define FASTBOOT 1
+
+#elif defined TARGET_MAPLE_MINI
 
     #define HAS_MAPLE_HARDWARE 1
 
