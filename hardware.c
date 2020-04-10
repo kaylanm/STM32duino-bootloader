@@ -159,6 +159,11 @@ void setupLEDAndButton (void) {
 #if defined(BUTTON_BANK) && defined (BUTTON_PIN) && defined (BUTTON_PRESSED_STATE)
     SET_REG(GPIO_CR(BUTTON_BANK,BUTTON_PIN),(GET_REG(GPIO_CR(BUTTON_BANK,BUTTON_PIN)) & crMask(BUTTON_PIN)) | BUTTON_INPUT_MODE << CR_SHITF(BUTTON_PIN));
 
+    #if defined(BUTTON_HIGH_BANK) && defined(BUTTON_HIGH_PIN)
+    SET_REG(GPIO_CR(BUTTON_HIGH_BANK,BUTTON_HIGH_PIN),(GET_REG(GPIO_CR(BUTTON_HIGH_BANK,BUTTON_HIGH_PIN)) & crMask(BUTTON_HIGH_PIN)) | BUTTON_OUTPUT_MODE << CR_SHITF(BUTTON_HIGH_PIN));
+    gpio_write_bit(BUTTON_HIGH_BANK, BUTTON_HIGH_PIN, 1);
+    #endif
+
     gpio_write_bit(BUTTON_BANK, BUTTON_PIN,1-BUTTON_PRESSED_STATE);// set pulldown resistor in case there is no button.
 #endif
 #if defined(LED_BANK) && defined(LED_PIN) && defined(LED_ON_STATE)

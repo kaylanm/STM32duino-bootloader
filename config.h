@@ -99,9 +99,12 @@
     #define LED_PIN              5
     #define LED_ON_STATE         1
 
-    #define BUTTON_BANK          GPIOB
-    #define BUTTON_PIN           2
+    #define BUTTON_BANK          GPIOA
+    #define BUTTON_PIN           0
     #define BUTTON_PRESSED_STATE 1
+
+    #define BUTTON_HIGH_BANK     GPIOC
+    #define BUTTON_HIGH_PIN      1
 
     #define USB_DISC_BANK        GPIOA
     #define USB_DISC_PIN         8
@@ -432,6 +435,10 @@
 // in order to use the boot1 pin on the Blue Pill which has a very week pullup
 #ifndef BUTTON_INPUT_MODE
 	#define BUTTON_INPUT_MODE 	CR_INPUT_PU_PD
+#endif
+
+#ifndef BUTTON_OUTPUT_MODE
+    #define BUTTON_OUTPUT_MODE  CR_OUTPUT_PP
 #endif
 
 #define STARTUP_BLINKS 5

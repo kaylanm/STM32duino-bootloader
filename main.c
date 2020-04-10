@@ -112,7 +112,11 @@ int main()
 #if defined(LED_BANK) && defined(LED_PIN) && defined(LED_ON_STATE)
             strobePin(LED_BANK, LED_PIN, 5, BLINK_FAST,LED_ON_STATE);
 #endif
-            systemHardReset();
+            while (TRUE) {
+              if (dfuUploadStarted()) {
+                dfuFinishUpload();
+              }
+            }
         }
     }
 
